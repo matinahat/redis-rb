@@ -862,7 +862,7 @@ class Redis
   end
   
   def bulk_reply
-    res = read_proto
+    res = read_proto[1..-1]
     if res.index(ERRCODE) == 0
       err = read(res.to_i.abs+2)
       raise RedisError, err.chomp
@@ -876,7 +876,7 @@ class Redis
   
   
   def multi_bulk_reply
-    res = read_proto
+    res = read_proto[1..-1]
     if res.index(ERRCODE) == 0
       err = read(res.to_i.abs+2)
       raise RedisError, err.chomp
@@ -886,7 +886,7 @@ class Redis
       items = Integer(res)
       list = []
       items.times do
-        len = Integer(read_proto)
+        len = Integer(read_proto[1..-1])
         if len == -1
           list << nil
         else
@@ -899,11 +899,11 @@ class Redis
   end
   
   def single_line_reply
-    read_proto
+    read_proto[1..-1]
   end
   
   def integer_reply
-    Integer(read_proto)
+    Integer(read_proto[1..-1])
   end
   
 end
