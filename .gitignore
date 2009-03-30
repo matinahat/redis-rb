@@ -1,3 +1,12 @@
-nohup.out
-redis/*
-rdsrv
+/.DS_Store
+\#*
+.#*
+.emacs*
+pkg
+db
+vendor
+*.log
+rdoc
+config.yml
+spec/config.yml
+*.tmproj
